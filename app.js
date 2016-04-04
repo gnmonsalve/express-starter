@@ -9,4 +9,16 @@ app.get('/', (req, res) => {
   res.send({ status: 'on' })
 })
 
+const m = []
+
+app.get('/messages',(req, res) => {
+  res.send({ messages: m });
+})
+
+app.post('/add', (req, res) => {
+  m.push(req.query.a);
+  res.sendStatus(200);
+})
+
+
 module.exports = app

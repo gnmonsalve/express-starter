@@ -17,11 +17,33 @@ describe('loading express', function () {
         done()
       })
   })
-
   it('404 everything else', done => {
     request(app)
       .get('/foo/bar')
       .expect(404, done)
+  })
+
+  it('entregar mensaje',done =>{
+    request(app)
+      .post('/add?a=Hola')
+      .expect(200)
+      .end((err, res) => done())
+  })
+  it('entregar mensaje',done =>{
+    request(app)
+      .post('/add?a=MiPrimerMensaje')
+      .expect(200)
+      .end((err, res) => done())
+  })
+  it('pedir mensajes',done =>{
+    request(app)
+      .get('/messages')
+      .expect(200)
+      .end((err, res) => {
+        const m = res.body.messages;
+        console.log(m);
+        done()
+      })
   })
 })
 
